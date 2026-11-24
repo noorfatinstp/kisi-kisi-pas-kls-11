@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Petualangan Menuju Kota Wirausaha – KWU Kelas XI</title>
+<style>
+
+:root{
+  --ink:#17243b;--muted:#66758e;--paper:#fffdf8;--line:#e5e9f2;
+  --navy:#172b4d;--blue:#3b82f6;--cyan:#38bdf8;--gold:#fbbf24;
+  --green:#22c55e;--red:#ef4444;--purple:#8b5cf6;--orange:#f97316;
+  --shadow:0 18px 45px rgba(24,43,77,.12);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;min-height:100vh;color:var(--ink);
+  font:16px/1.55 "Trebuchet MS",system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(ellipse at 12% 8%,rgba(56,189,248,.18),transparent 32%),
+    radial-gradient(ellipse at 90% 20%,rgba(251,191,36,.18),transparent 30%),
+    linear-gradient(135deg,#eaf5ff 0%,#f8f4e9 48%,#e9f8f1 100%);
+}
+.h{display:none!important}
+.w{max-width:900px;margin:0 auto;padding:18px 16px 48px}
+.card{
+  background:rgba(255,255,255,.94);border:1px solid rgba(255,255,255,.9);
+  border-radius:24px;padding:22px;margin:14px 0;box-shadow:var(--shadow);
+}
+#home .card:first-child{
+  color:#fff;overflow:hidden;position:relative;border:0;
+  background:linear-gradient(125deg,#17345d 0%,#235a83 55%,#258b88 100%);
+  padding:clamp(24px,5vw,42px);
+}
+#home .card:first-child:before{
+  content:"";position:absolute;width:310px;height:310px;border-radius:50%;
+  right:-90px;top:-130px;background:rgba(255,255,255,.09);
+}
+#home .card:first-child:after{
+  content:"🏰";position:absolute;right:34px;bottom:8px;font-size:clamp(70px,13vw,130px);
+  opacity:.22;filter:drop-shadow(0 8px 8px rgba(0,0,0,.2));
+}
+.hero-kicker{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;
+  border:1px solid rgba(255,255,255,.3);border-radius:99px;background:rgba(255,255,255,.1);
+  font-size:12px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase}
+#home h1{font-size:clamp(30px,5vw,48px);line-height:1.08;max-width:620px;margin:16px 0 12px;letter-spacing:-1.4px}
+#home .intro{font-size:17px;max-width:620px;color:#e0f2fe;margin:0 0 22px}
+.hero-stats{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 4px}
+.hero-stats span{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);
+  border-radius:14px;padding:9px 13px;font-size:13px;font-weight:700}
+label{display:block;font-weight:800;font-size:14px;margin:14px 0 5px;color:var(--ink)}
+input,select{font:inherit;width:100%;padding:13px 14px;border-radius:13px;border:2px solid #e4eaf3;
+  background:#f8fbff;color:var(--ink);margin:5px 0 8px;outline:none}
+input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(59,130,246,.12)}
+button{font:inherit;cursor:pointer;border:1px solid #dce4ef;border-radius:13px;padding:11px 16px;
+  color:var(--ink);background:#fff;font-weight:800;transition:transform .16s,box-shadow .16s,background .16s}
+button:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 18px rgba(23,43,77,.12)}
+button:disabled{opacity:.35;cursor:not-allowed}
+.pri{background:linear-gradient(100deg,#f59e0b,#f97316);color:#fff;border:0;
+  box-shadow:0 8px 20px rgba(249,115,22,.25)}
+#go{font-size:17px;padding:15px 20px;border-radius:15px;margin-top:10px}
+.rules-card{border:1px solid #e7edf5}
+.rules-card h3{margin:0 0 8px;font-size:19px}
+.rules-card ul{padding-left:21px;margin:8px 0 0;color:#52627a}
+.rules-card li{margin:7px 0}
+.world-map{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}
+.world-stop{position:relative;text-align:center;padding:13px 7px 11px;border-radius:17px;
+  background:#f3f7fc;border:1px solid #e3eaf3;min-height:94px}
+.world-stop .emoji{display:block;font-size:29px;line-height:1.2;margin-bottom:5px}
+.world-stop b{display:block;font-size:11px;line-height:1.2}
+.world-stop small{display:block;color:#7a8799;font-size:10px;margin-top:4px}
+.world-stop:nth-child(4n+1){background:#e8f7ed}
+.world-stop:nth-child(4n+2){background:#fff5dc}
+.world-stop:nth-child(4n+3){background:#f1ebff}
+.world-stop:nth-child(4n){background:#e7f5ff}
+.hud{position:sticky;top:0;z-index:5;background:rgba(19,43,76,.97);color:white;
+  padding:11px 16px;box-shadow:0 5px 18px rgba(16,35,63,.2);backdrop-filter:blur(12px)}
+.hud .r{display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:auto;gap:10px}
+#who{font-size:14px}#cnt{color:#c8d8ec}
+#tm{font:800 22px ui-monospace,Menlo,monospace;color:#fde68a}
+#tm.low{color:#fca5a5;animation:pulse .8s infinite alternate}
+.pb{height:12px;background:rgba(255,255,255,.18);border-radius:99px;margin:12px auto 2px;
+  max-width:900px;overflow:visible;position:relative}
+.pb i{display:block;height:100%;width:0;background:linear-gradient(90deg,#34d399,#a3e635,#facc15);
+  border-radius:99px;transition:width .4s;position:relative}
+.pb i:after{content:attr(data-av);position:absolute;right:-11px;top:-18px;font-size:25px;line-height:1}
+.quest-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.zone-tag{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border-radius:99px;
+  color:#fff;font-weight:900;font-size:13px;box-shadow:0 5px 12px rgba(0,0,0,.12)}
+.quest-count{font-size:12px;color:var(--muted);font-weight:800}
+#q{border:2px solid #e8edf5;position:relative;overflow:hidden;padding:clamp(18px,4vw,30px)}
+#q:before{content:"";position:absolute;right:-32px;top:-42px;width:130px;height:130px;
+  border-radius:50%;background:rgba(56,189,248,.08)}
+#q p{font-size:clamp(17px,2.4vw,20px);font-weight:700;line-height:1.5;margin:16px 0 20px;position:relative}
+.op{display:flex;gap:12px;width:100%;text-align:left;margin:10px 0;align-items:center;
+  padding:13px 15px;border:2px solid #e8edf5;background:#fbfdff;border-radius:15px;position:relative}
+.op b{flex:0 0 31px;height:31px;border-radius:10px;background:#e8eef8;display:grid;place-items:center;
+  font-size:13px;color:#52627a}
+.op span{font-weight:650}
+.op.on{border-color:#3b82f6;background:#eff6ff;box-shadow:0 0 0 3px rgba(59,130,246,.1)}
+.op.on b{background:#3b82f6;color:#fff}
+.row{display:flex;gap:10px;justify-content:space-between;margin-top:14px;flex-wrap:wrap}
+#prev,#next{flex:1;min-width:130px}
+#grid{display:flex;flex-wrap:wrap;gap:7px}
+.g{width:42px;padding:8px 0;text-align:center;border-radius:12px}
+.g.dn{background:#dcfce7;border-color:#86efac;color:#166534}
+.g.cur{outline:3px solid #3b82f6;background:#eff6ff}
+#send{width:100%;padding:15px;font-size:17px;margin-top:12px}
+#res .card:first-child{background:linear-gradient(140deg,#17345d,#246c83);color:white;text-align:center}
+#res .big{font-size:clamp(64px,12vw,92px);font-weight:1000;color:#facc15;line-height:1}
+#res .mu{color:#d5e5f5}
+#res .rv{background:#fff;border:1px solid #e7edf5;border-left:6px solid #cbd5e1;
+  padding:16px 18px;margin:12px 0;border-radius:15px;box-shadow:0 5px 15px rgba(23,43,77,.05)}
+#res .rv.ok{border-left-color:#22c55e}
+#res .rv.no{border-left-color:#ef4444}
+#res .rv p{margin:5px 0}
+#res h2{margin:26px 4px 10px}
+#md{display:none;position:fixed;inset:0;background:rgba(9,20,38,.72);z-index:20;
+  align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(5px)}
+.box{background:#fff;border-radius:23px;padding:25px;max-width:440px;width:100%;
+  border:1px solid #e5eaf2;box-shadow:0 25px 80px rgba(0,0,0,.3);color:var(--ink)}
+.box h3{margin:0 0 8px;font-size:23px}
+.box .row{justify-content:flex-end}
+.ok{color:#15803d}.no{color:#dc2626}.mu{color:var(--muted)}
+a{color:#2563eb;cursor:pointer;font-size:13px}
+.rs{display:inline-block;margin:12px 4px}
+@keyframes pulse{to{opacity:.55}}
+@media(max-width:620px){
+ .w{padding:12px 11px 34px}.card{padding:17px;border-radius:19px}
+ #home .card:first-child{padding:24px 20px 28px}
+ #home .card:first-child:after{right:8px;bottom:0;font-size:75px}
+ .world-map{grid-template-columns:repeat(3,1fr);gap:7px}
+ .world-stop{min-height:82px;padding:10px 4px}
+ .world-stop .emoji{font-size:25px}
+ .world-stop b{font-size:10px}
+ .hud{padding:9px 12px}
+ #tm{font-size:19px}
+ .op{padding:11px 10px;gap:9px}
+ .op span{font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+</style></head><body>
+<div id="home" class="w">
+<div class="card">
+  <div class="hero-kicker">🎮 GAME PETUALANGAN EDUKASI · KWU KELAS XI</div>
+  <h1>Petualangan Menuju Kota Wirausaha</h1>
+  <p class="intro">Jadilah penjelajah muda! Taklukkan berbagai wilayah, pecahkan tantangan bisnis, kumpulkan pengalaman, dan buktikan bahwa kamu siap membangun usaha sendiri.</p>
+  <div class="hero-stats"><span>🧭 11 Wilayah Misi</span><span>⭐ Semua 40 Soal</span><span>⏱️ 45 Menit</span></div>
+  <div class="world-map">
+    <div class="world-stop"><span class="emoji">🌲</span><b>Hutan Peluang</b><small>Temukan ide usaha</small></div>
+    <div class="world-stop"><span class="emoji">⛰️</span><b>Gunung Pesaing</b><small>Kenali kompetitor</small></div>
+    <div class="world-stop"><span class="emoji">🕳️</span><b>Gua SWOT</b><small>Petakan strategi</small></div>
+    <div class="world-stop"><span class="emoji">🏘️</span><b>Desa Pasar</b><small>Pahami konsumen</small></div>
+    <div class="world-stop"><span class="emoji">🌄</span><b>Lembah 4P</b><small>Susun pemasaran</small></div>
+    <div class="world-stop"><span class="emoji">🏝️</span><b>Pulau Merek</b><small>Bangun identitas</small></div>
+    <div class="world-stop"><span class="emoji">🏙️</span><b>Kota Digital</b><small>Promosi online</small></div>
+    <div class="world-stop"><span class="emoji">🌉</span><b>Jembatan Layak</b><small>Uji kelayakan</small></div>
+    <div class="world-stop"><span class="emoji">🏰</span><b>Kastil Keuangan</b><small>Hitung hasil usaha</small></div>
+    <div class="world-stop"><span class="emoji">🗼</span><b>Menara Evaluasi</b><small>Ambil keputusan</small></div>
+    <div class="world-stop"><span class="emoji">🚪</span><b>Gerbang Proposal</b><small>Raih gelar juara</small></div>
+  </div>
+  <label style="color:white">Pilih tokoh petualang<select id="av"><option>🧭</option><option>🧙</option><option>🥷</option><option>🦸</option><option>🧑‍🚀</option><option>🐲</option></select></label>
+  <label style="color:white">Nama lengkap<input id="nm" maxlength="40" autocomplete="off" placeholder="Tulis nama lengkapmu"></label>
+  <label style="color:white">Kelas<input id="kl" maxlength="15" placeholder="Contoh: XI TKJ 1" autocomplete="off"></label>
+  <button class="pri" id="go" style="width:100%">🚀 Mulai Petualangan</button>
+</div>
+<div class="card rules-card"><h3>📜 Aturan Petualangan</h3>
+<ul>
+<li>Waktu bermain adalah <b>45 menit</b>. Jika waktu habis, permainan otomatis berakhir.</li>
+<li>Setiap siswa mendapat susunan soal dan urutan pilihan jawaban yang diacak.</li>
+<li>Jawaban kosong dihitung salah. Pastikan semua misi terjawab sebelum menekan <b>Kirim Nilai</b>.</li>
+<li>Jangan berpindah tab atau aplikasi. Jika keluar dari jalur, kamu harus mengulang jawaban dari pos pertama. Waktu tetap berjalan.</li>
+</ul></div>
+<a class="rs">Reset perangkat (guru)</a></div>
+
+<div id="quiz" class="h">
+<div class="hud"><div class="r"><div><b id="who"></b><br><small class="mu" id="cnt">Siapkan semua misi!</small></div><div id="tm">45:00</div></div><div class="pb"><i id="bar"></i></div></div>
+<div class="w"><div class="card" id="q"></div>
+<div class="row"><button id="prev">← Sebelumnya</button><button id="next">Berikutnya →</button></div>
+<div class="card"><div id="grid"></div></div>
+<button class="pri" id="send" style="width:100%">🏁 Kirim Nilai</button></div></div>
+
+<div id="res" class="h w"></div>
+<div id="md"></div>
+
+<script>
+const Q=[
+["Warung di sekitar sekolah masih mencatat pesanan dan utang di buku tulis sehingga sering salah hitung, dan belum ada aplikasi pencatatan sederhana yang murah. Sumber peluang usaha bagi siswa TKJ adalah ...","Masalah pencatatan tanpa solusi yang cocok",["Banyaknya warung di dekat sekolah","Keahlian siswa merakit komputer","Murahnya harga buku tulis","Banyaknya aplikasi hiburan siswa"],"Peluang bersumber dari masalah nyata yang belum punya solusi yang sesuai."],
+["Pantai wisata punya banyak ikan asin dan teri kering, tetapi wisatawan sulit menemukan oleh-oleh yang praktis dan tahan lama. Langkah siswa yang paling tepat adalah ...","Mengolahnya jadi oleh-oleh kemasan praktis",["Menjual ikan kering mentah ke pasar induk","Membuka restoran seafood mewah di kota","Menunggu program dari pemerintah daerah","Menjualnya dengan harga paling murah"],"Kebutuhan wisatawan (praktis, tahan lama) dijawab dengan produk olahan bernilai tambah."],
+["Banyak rumah di perumahan baru memasang CCTV dan kunci pintar, tetapi tenaga pemasang dan perawatnya sangat sedikit. Faktor pendorong peluang jasa bagi siswa TITL adalah ...","Tren teknologi rumah dan kebutuhan belum terlayani",["Turunnya harga kabel listrik","Banyaknya perumahan berdekatan","Kebiasaan warga belanja daring","Keinginan siswa segera berpenghasilan"],"Tren teknologi ditambah kebutuhan yang belum dilayani tenaga terampil adalah sumber peluang."],
+["Tiga ide usaha: (1) kafe bertema luar angkasa, modal Rp80 juta, belum disurvei; (2) fotokopi di depan sekolah yang sudah punya lima pesaing; (3) cuci sepatu antar-jemput, 60 dari 100 siswa pernah kesulitan mencuci sepatu, belum ada pesaing, modal Rp3 juta. Ide paling layak adalah ...","Ide 3 (cuci sepatu)",["Ide 1 (kafe)","Ide 2 (fotokopi)","Ketiganya sekaligus","Menunggu ide tanpa risiko"],"Ide 3 punya bukti permintaan dari survei, belum ada pesaing, dan modalnya kecil."],
+["Desa penghasil bambu hanya menjual bambu batangan murah. Siswa TPM ingin memakai keterampilan permesinan untuk menaikkan nilai jualnya. Peluang paling tepat adalah ...","Membuat sedotan dan alat makan bambu",["Menambah jumlah bambu batangan","Membuka bubut khusus baja","Membeli mesin besar sebelum ada pembeli","Menjual bambu mentah ke luar daerah"],"Nilai tambah, memakai keahlian siswa, dan menyasar pasar yang peduli lingkungan."],
+["Pesaing servis laptop: Toko A murah, tanpa garansi, 5 hari; Toko B mahal, garansi 30 hari, 1 hari; Teknisi C harga sedang, datang ke rumah, tanpa nota dan garansi. Celah pasar yang realistis adalah ...","Garansi, harga menengah, pengerjaan cepat",["Harga paling murah dari semua","Meniru teknisi lepas C","Berhenti servis, jual laptop baru","Harga tertinggi agar terkesan bagus"],"Belum ada pesaing yang menggabungkan garansi, harga menengah, dan kecepatan."],
+["Langkah benchmarking (acak): P) kumpulkan data pembanding; Q) tentukan aspek yang dibandingkan; R) terapkan perbaikan dan evaluasi; S) pilih usaha pembanding; T) analisis kesenjangan. Urutan yang benar adalah ...","Q – S – P – T – R",["P – Q – S – T – R","S – Q – P – T – R","Q – P – S – R – T","Q – S – T – P – R"],"Aspek, lalu pembanding, data, kesenjangan, dan terakhir perbaikan."],
+["Siswa akan membuka usaha minuman dingin di sekolah dan ingin melakukan benchmarking. Pembanding yang paling tepat adalah ...","Kedai minuman kecil yang sukses di kota sama",["Jaringan internasional ratusan gerai","Usaha beda bidang beromzet terbesar","Usaha yang baru buka sehari","Tidak perlu, setiap usaha berbeda"],"Pembanding harus sejenis dan setara skala agar hasilnya bisa diadaptasi."],
+["Katering M: 200 pelanggan per bulan, 20% pesan ulang, rating 4,0. Katering N: 150 pelanggan per bulan, 60% pesan ulang, rating 4,7. Kesimpulan paling tepat adalah ...","Loyalitas N lebih kuat, layak dipelajari",["M unggul semuanya, N harus meniru","Keduanya setara karena rating di atas 4","Data pesan ulang tidak relevan","N pasti bangkrut karena sedikit"],"Pesan ulang dan rating tinggi menunjukkan kepuasan dan loyalitas, bukan sekadar jumlah pelanggan."],
+["Usaha cuci mobil menyebarkan kabar tanpa bukti bahwa pesaingnya memakai sampo berbahaya. Menurut prinsip persaingan sehat, tindakan itu ...","Tidak tepat, melanggar etika persaingan",["Wajar, asal pesaing kalah","Tepat jika pelanggan tidak tahu","Tepat karena pesaing pun begitu","Tidak berpengaruh pada usaha"],"Menyebar kabar tanpa bukti melanggar etika dan merusak kepercayaan konsumen."],
+["Usaha foto produk siswa DKV: kamera dan editing bagus; namanya belum dikenal; UMKM sekitar makin butuh foto produk; studio besar baru buka dengan promo besar. Pengelompokan SWOT berurutan (kamera bagus; belum dikenal; UMKM butuh; studio promo) adalah ...","S – W – O – T",["O – W – S – T","S – O – W – T","W – S – O – T","S – W – T – O"],"Internal: kamera bagus (S), belum dikenal (W). Eksternal: UMKM butuh (O), studio promo (T)."],
+["Bengkel las siswa TPM punya tukang berpengalaman (kekuatan), dan di sekitarnya banyak perumahan baru butuh pagar dan kanopi (peluang). Strategi yang memadukan keduanya adalah ...","Paket pagar dan kanopi untuk perumahan baru",["Menutup bengkel sementara","Hanya membenahi kelemahan","Menurunkan kualitas agar murah","Menunggu pesaing lebih dulu"],"Strategi SO: kekuatan dipakai untuk menangkap peluang."],
+["Produk perdana Sinta ditolak tiga toko. Ucapan yang mencerminkan growth mindset adalah ...","“Kita perbaiki dari alasan penolakannya.”",["“Mungkin kita memang tidak berbakat.”","“Tokonya saja yang tidak paham.”","“Kita berhenti, tunggu keberuntungan.”","“Sukses hanya untuk orang tertentu.”"],"Growth mindset memandang kegagalan sebagai bahan belajar dan perbaikan."],
+["Pak Heru membeli sepatu keselamatan untuk kerja di bengkel, dan juga sepatu edisi terbatas Rp3.000.000 yang tidak ia perlukan tetapi mampu ia beli. Klasifikasi berurutan yang tepat adalah ...","Kebutuhan, lalu keinginan yang menjadi permintaan",["Keduanya kebutuhan","Keduanya keinginan","Keinginan, lalu kebutuhan","Keduanya bukan permintaan"],"Sepatu keselamatan = kebutuhan. Sepatu edisi terbatas = keinginan, dan karena ada daya beli menjadi permintaan."],
+["Kedai bubur Mawar menawarkan topping pilihan, bubur tanpa MSG untuk anak, dan wadah ramah lingkungan, harga 20% di atas kedai lain, tetapi tetap ramai. Ini menunjukkan penerapan ...","Diferensiasi produk",["Harga murah","Produksi massal","Distribusi eksklusif","Pemotongan biaya"],"Keunggulan berbeda yang bernilai membuat pelanggan mau membayar lebih."],
+["Toko alat gambar teknik membagi pasar menurut jenjang dan jurusan, memilih siswa SMK teknik sebagai sasaran, lalu menampilkan citra “toko alat gambar lengkap khusus pelajar”. Urutan istilahnya adalah ...","Segmentasi – Targeting – Positioning",["Targeting – Segmentasi – Positioning","Positioning – Targeting – Segmentasi","Segmentasi – Positioning – Targeting","Targeting – Positioning – Segmentasi"],"Membagi pasar = segmentasi; memilih sasaran = targeting; membentuk citra = positioning."],
+["Toko sepatu Langkah Muda: (1) menambah garansi sol 3 bulan; (2) menunjuk reseller di dua kota lain; (3) membagikan voucher akhir pekan lewat Instagram; (4) membuat harga paket dua pasang lebih hemat. Unsur bauran pemasarannya berurutan adalah ...","Product – Place – Promotion – Price",["Price – Place – Promotion – Product","Product – Promotion – Place – Price","Product – Place – Price – Promotion","Place – Product – Promotion – Price"],"Garansi = Product; reseller = Place; voucher = Promotion; harga paket = Price."],
+["Biaya produksi satu bungkus bumbu instan Rp6.000. Pemilik ingin laba 25% dari biaya produksi. Harga jual yang tepat adalah ...","Rp7.500",["Rp6.250","Rp6.750","Rp7.000","Rp7.250"],"6.000 + (25% × 6.000) = 7.500."],
+["Sabun cuci organik dijual Rp45.000, pesaing Rp22.000. Target pasarnya pelajar dan keunggulan organiknya tidak dijelaskan di mana pun. Penjualan rendah. Analisis paling tepat adalah ...","Harga melampaui daya beli dan nilai tak dijelaskan",["Hanya warna kemasan yang bermasalah","Harga tinggi pasti berarti kualitas","Harga harus sama persis dengan pesaing","Promosi tidak perlu untuk produk organik"],"Harga jauh di atas daya beli target dan keunggulan produk belum dikomunikasikan."],
+["Pengrajin tas kulit hanya menjual di bengkelnya. Pelanggan luar kota bingung cara membeli, dan wisatawan jarang datang. Perbaikan unsur Place yang paling tepat adalah ...","Jual di marketplace dan titip di toko oleh-oleh",["Menurunkan harga semua produk","Menambah pilihan warna","Mengganti logo","Memberi hadiah pembeli yang datang"],"Place = saluran distribusi dan kemudahan konsumen memperoleh produk."],
+["Roti Hangat rasanya disukai (rating 4,7), harganya sama dengan pesaing, lokasinya di jalan ramai, tetapi hanya 3% warga sekitar yang mengetahuinya. Unsur 4P yang paling perlu diperbaiki adalah ...","Promotion",["Product","Price","Place","Product dan Price"],"Produk, harga, dan lokasi sudah baik; masalahnya kurang dikenal (promotion)."],
+["Merek Tani Segar mengganti nama, logo, dan warna kemasan setiap musim. Dampak yang paling mungkin adalah ...","Merek sulit dikenali dan diingat",["Merek makin mudah dikenali","Biaya produksi turun otomatis","Pesaing tak bisa meniru","Kepercayaan naik otomatis"],"Identitas merek harus konsisten agar mudah dikenali dan diingat."],
+["Siswa DKV membuat merek madu hutan dengan slogan “Manis Alam, Sehat Keluarga”. Fungsi utama slogan adalah ...","Menyampaikan pesan merek secara singkat",["Menunjukkan harga per botol","Menggantikan label komposisi","Menunjukkan alamat produksi","Membuktikan izin edar"],"Slogan adalah pesan nilai merek yang singkat dan mudah diingat."],
+["Usaha sambal beralih ke pouch bertutup zip dengan label komposisi, tanggal kedaluwarsa, nomor PIRT, dan logo. Fungsi perubahan ini adalah ...","Melindungi, menginformasikan, dan membangun identitas",["Sekadar menarik perhatian","Menaikkan harga saja","Mengurangi jumlah pelanggan","Menggantikan semua promosi"],"Kemasan melindungi produk, memberi informasi, dan memperkuat identitas merek."],
+["Kopi Senja ingin dikenal premium, tetapi kemasannya sederhana, harganya termurah, dan promonya selalu “cuci gudang”. Masalah utama branding-nya adalah ...","Citra dan elemen merek tidak konsisten",["Nama merek terlalu pendek","Kopi premium tak perlu branding","Logo harus diganti tiap bulan","Konsumen tak peduli kemasan"],"Citra premium tidak didukung kemasan, harga, dan promosi."],
+["Dua iklan dengan biaya sama. Konten A: 50.000 tayangan, 500 klik, 25 pembelian. Konten B: 10.000 tayangan, 400 klik, 40 pembelian. Kesimpulan paling tepat adalah ...","B lebih efektif menghasilkan pembeli",["A lebih baik karena tayangan terbanyak","Keduanya sama karena biaya sama","Keduanya tak bisa dibandingkan","Iklan sebaiknya dihentikan"],"A: klik 1%, konversi 5%. B: klik 4%, konversi 10%, dan pembeli 40 > 25."],
+["Toko alat pancing premium menyasar pria 35–55 tahun yang hobi memancing, dengan anggaran promosi kecil. Platform dan konten paling tepat adalah ...","Grup Facebook pemancing dan video ulasan YouTube",["Tantangan dance di TikTok","Billboard di jalan tol","Iklan televisi nasional","Poster di kantin sekolah"],"Platform dan gaya konten harus sesuai karakter target dan anggaran."],
+["Data akun busana muslim: 70% pengikut perempuan 18–24 tahun, paling aktif pukul 19.00–21.00, banyak menyimpan konten tips padu padan. Tindakan paling tepat adalah ...","Perbanyak tips padu padan, unggah di jam aktif",["Unggah acak tengah malam","Ganti target ke pria dewasa","Hapus semua konten tips","Berhenti membaca data"],"Konten dan jadwal unggah disesuaikan dengan profil dan perilaku audiens."],
+["UMKM skincare remaja di kota kecil beranggaran Rp1.000.000. Selebgram nasional bertarif Rp25.000.000; micro-influencer lokal Rp200.000 per orang. Pilihan terbaik adalah ...","Lima micro-influencer lokal",["Menunda sampai dana Rp25 juta","Membayar sebagian tarif selebgram","Membagi produk gratis ke semua remaja","Iklan nasional dengan seluruh dana"],"5 × 200.000 = 1.000.000, dan audiens lokal sesuai target remaja."],
+["Akun usaha pupuk organik hanya mengunggah foto produk bertuliskan “Beli sekarang!” dan interaksinya rendah. Perbaikan paling tepat adalah ...","Tambah konten edukasi dan testimoni",["Unggah “Beli sekarang!” tiap jam","Hapus semua ajakan beli","Tutup kolom komentar","Ganti nama akun tiap minggu"],"Konten edukasi membangun kepercayaan, lalu diikuti ajakan beli yang jelas."],
+["Usaha pewarnaan batik rumahan berencana membuang limbah cair langsung ke sungai, dan warga sudah mengeluh. Aspek kelayakan yang perlu dibenahi adalah ...","Lingkungan dan hukum",["Pemasaran","Keuangan","Branding","Sumber daya manusia"],"Pembuangan limbah menyangkut pengelolaan lingkungan dan perizinan."],
+["Sebelum membuka les musik, siswa menyurvei pasar. Hasil yang paling menunjukkan analisis pasar yang baik adalah ...","70% dari 120 siswa berminat; pesaing hanya dua",["Banyak teman bilang idenya bagus","Musik disukai semua orang","Kami suka musik, pasti berhasil","Modal ada, pasar tak perlu diteliti"],"Analisis pasar memakai data minat dan peta pesaing, bukan opini."],
+["Usaha X bermodal Rp10.000.000 dengan laba Rp2.500.000 per bulan. Usaha Y bermodal Rp6.000.000 dengan laba Rp1.000.000 per bulan. Usaha yang lebih cepat balik modal dan lamanya adalah ...","X, 4 bulan",["Y, 4 bulan","X, 6 bulan","Y, 6 bulan","Keduanya 5 bulan"],"X: 10 juta ÷ 2,5 juta = 4 bulan. Y: 6 juta ÷ 1 juta = 6 bulan."],
+["Studi kelayakan olahan buah: pasar besar dan modal ada, tetapi bahan baku utama hanya tersedia 3 bulan per tahun dan tanpa pemasok lain. Penilaian paling tepat adalah ...","Layak bersyarat, benahi pasokan bahan baku",["Layak penuh karena pasar besar","Batalkan usaha","Abaikan dulu soal bahan baku","Ganti produk tiap musim"],"Aspek teknis dan operasional (pasokan) harus dibenahi sebelum usaha dijalankan."],
+["Siswa TITL membuat 50 lampu hias. Biaya bahan Rp1.500.000, upah Rp500.000, kemasan Rp250.000. Semua terjual Rp60.000 per buah. Laba yang diperoleh adalah ...","Rp750.000",["Rp450.000","Rp600.000","Rp1.000.000","Rp1.500.000"],"Pendapatan 50 × 60.000 = 3.000.000; biaya 2.250.000; laba 750.000."],
+["Toko mencatat penjualan Rp80.000.000, HPP Rp48.000.000, beban gaji Rp12.000.000, beban sewa Rp4.000.000, pendapatan lain-lain Rp2.000.000, beban lain-lain Rp1.000.000. Laba sebelum pajak adalah ...","Rp17.000.000",["Rp14.000.000","Rp15.000.000","Rp16.000.000","Rp18.000.000"],"80 − 48 − 12 − 4 = 16 juta; ditambah 2 dan dikurangi 1 menjadi 17 juta."],
+["Modal awal Rp40.000.000. Setahun laba Rp15.000.000, prive total Rp4.000.000, tambahan investasi Rp5.000.000. Modal akhir adalah ...","Rp56.000.000",["Rp51.000.000","Rp59.000.000","Rp60.000.000","Rp64.000.000"],"40 + 15 + 5 − 4 = 56 juta."],
+["Toko Maju mencatat: (1) beli mesin Rp30 juta, tunai Rp10 juta sisanya utang; (2) pinjaman bank tunai Rp20 juta; (3) bayar utang Rp5 juta; (4) pemilik ambil barang dagangan Rp1 juta untuk pribadi. Total kewajiban berubah ...","Naik Rp35.000.000",["Naik Rp15.000.000","Naik Rp20.000.000","Naik Rp25.000.000","Naik Rp30.000.000"],"Utang mesin +20, pinjaman +20, bayar utang −5 = +35 juta. Prive tidak memengaruhi kewajiban."],
+["Penjualan usaha minuman naik tiap bulan, tetapi laba turun. Harga bahan baku naik 25% sedangkan harga jual dan ukuran gelas tetap. Tindakan paling tepat adalah ...","Hitung ulang biaya, sesuaikan harga atau porsi",["Tambah diskon agar makin laris","Ganti bahan murah tanpa uji rasa","Berhenti mencatat biaya","Naikkan harga dua kali lipat"],"Hitung ulang biaya produksi, sesuaikan harga atau porsi, dan cari pemasok alternatif tanpa menurunkan kualitas."],
+["Proposal usaha modifikasi motor listrik siswa TSM berdesain bagus, tetapi tanpa perkiraan biaya, proyeksi pendapatan, dan analisis pesaing. Revisi paling tepat adalah ...","Tambah RAB, proyeksi laba, analisis pesaing",["Tambah foto seluruh anggota tim","Tambah sejarah kendaraan listrik","Ganti huruf dan warna sampul","Perpanjang kata pengantar"],"Penyandang dana menilai kelayakan biaya, proyeksi, dan posisi terhadap pesaing."]
+];
+const G=[5,5,3,3,5,4,5,4,4,1,1],DUR=45*60000,K="kwu11_misi_v2",PIN="KWU11";
+const ZN=["🌲 Hutan Peluang","⛰️ Gunung Pesaing","🕳️ Gua SWOT","🏘️ Desa Pasar","🌄 Lembah 4P","🏝️ Pulau Merek","🏙️ Kota Digital","🌉 Jembatan Kelayakan","🏰 Kastil Keuangan","🗼 Menara Evaluasi","🚪 Gerbang Proposal"];
+const zone=i=>{let p=0;for(let g=0;g<G.length;g++){p+=G[g];if(i<p)return g}};
+const $=s=>document.querySelector(s);
+let S=null,tk=null,away=false;
+const E=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const sh=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const fmt=ms=>{const s=Math.max(0,Math.ceil(ms/1000));return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")};
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const opts=i=>sh([Q[i][1],...Q[i][2]]);
+const show=id=>["home","quiz","res"].forEach(x=>$("#"+x).classList.toggle("h",x!==id));
+function build(){return sh([...Array(Q.length).keys()])}
+function modal(h,b){const m=$("#md");m.innerHTML='<div class="box">'+h+'<div class="row">'+b.map((x,i)=>'<button class="'+(x[1]||"")+'" data-m="'+i+'">'+x[0]+'</button>').join("")+'</div></div>';m.style.display="flex";m.onclick=e=>{const v=e.target.dataset.m;if(v!==undefined){m.style.display="none";if(b[v][2])b[v][2]()}}}
+function start(){const n=$("#nm").value.trim(),k=$("#kl").value.trim();if(!n||!k){modal("<h3>Data belum lengkap</h3><p>Isi nama dan kelas dulu.</p>",[["OK","pri"]]);return}
+S={n,k,av:$("#av").value,t0:Date.now(),v:0,cur:0,done:false,qs:build().map(i=>({i,o:opts(i),a:-1}))};save();run()}
+function run(){show("quiz");$("#who").textContent=(S.av||"🧭")+" "+S.n+" · "+S.k;clearInterval(tk);tk=setInterval(tick,1000);tick();render()}
+function tick(){const l=S.t0+DUR-Date.now();if(l<=0){finish(true);return}$("#tm").textContent=fmt(l);$("#tm").classList.toggle("low",l<300000)}
+function render(){const q=S.qs[S.cur],d=Q[q.i],n=S.qs.length,an=S.qs.filter(x=>x.a>=0).length;
+$("#bar").style.width=(an/n*100)+"%";$("#bar").dataset.av=S.av||"🧭";$("#cnt").textContent="Pos terlewati "+an+" dari "+n;
+$("#q").innerHTML='<div class="quest-top"><span class="zone-tag" style="background:hsl('+(zone(q.i)*33)+' 55% 38%)">'+ZN[zone(q.i)]+'</span><span class="quest-count">🧩 MISI '+(S.cur+1)+' / '+n+'</span></div><p>'+E(d[0])+'</p>'+q.o.map((t,j)=>'<button class="op'+(q.a===j?" on":"")+'" data-j="'+j+'"><b>'+"ABCDE"[j]+'</b><span>'+E(t)+'</span></button>').join("");
+$("#grid").innerHTML=S.qs.map((x,j)=>'<button class="g'+(j===S.cur?" cur":"")+(x.a>=0?" dn":"")+'" data-g="'+j+'">'+(j+1)+'</button>').join("");
+$("#prev").disabled=S.cur===0;$("#next").disabled=S.cur===n-1}
+function reset(){S.qs.forEach(q=>{q.o=opts(q.i);q.a=-1});S.cur=0;S.v++;save();render();
+modal("<h3>🌫️ Kamu tersesat!</h3><p><b>"+E(S.n)+"</b> ("+E(S.k)+") keluar dari jalur petualangan. Peta dan bekalmu hilang, jadi kamu harus kembali ke pos 1. Waktu tetap berjalan.</p><p class='mu'>Keluar jalur ke-"+S.v+"</p>",[["Kembali ke Pos 1","pri"]])}
+function finish(auto){if(S.done)return;S.done=true;S.auto=!!auto;S.t1=Math.min(Date.now(),S.t0+DUR);clearInterval(tk);$("#md").style.display="none";save();result()}
+function result(){show("res");const n=S.qs.length,b=S.qs.filter(q=>q.a>=0&&Q[q.i][1]===q.o[q.a]).length,k=S.qs.filter(q=>q.a<0).length,nl=Math.round(b/n*100);
+const r=nl>=90?["👑","Raja Wirausaha","Kamu tiba di Kota Wirausaha dengan gemilang!"]:nl>=75?["🏰","Penjelajah Tangguh","Gerbang kota sudah terlihat, sedikit lagi sampai."]:nl>=60?["⛺","Petualang Muda","Perjalananmu baru separuh. Pelajari catatannya, lalu coba lagi."]:["🌲","Pengelana Tersesat","Kamu masih tersesat di hutan. Baca catatan perjalanan di bawah."];
+$("#res").innerHTML='<div class="card" style="text-align:center">'+(S.auto?'<p class="no"><b>⏰ Waktu 45 menit habis, petualangan berakhir</b></p>':'')+'<div style="font-size:42px">'+r[0]+'</div><b>'+r[1]+'</b><p class="mu">'+r[2]+'</p><div class="big">'+nl+'</div><p class="mu">'+E(S.n)+' · '+E(S.k)+'</p><p>Benar <b class="ok">'+b+'</b> · Salah <b class="no">'+(n-b-k)+'</b> · Kosong <b>'+k+'</b> dari '+n+' soal</p><p class="mu">Waktu: '+fmt(S.t1-S.t0)+' · Keluar halaman: '+S.v+' kali</p><p><b>Foto layar halaman ini dan kirim ke guru.</b></p></div><h2>📜 Catatan Perjalanan: Pembahasan</h2>'+
+S.qs.map((q,i)=>{const d=Q[q.i],ok=q.a>=0&&d[1]===q.o[q.a];return '<div class="rv '+(ok?"ok":"no")+'"><p><b>'+(ok?"✅":"❌")+' '+(i+1)+'.</b> '+E(d[0])+'</p><p>Jawabanmu: '+(q.a>=0?E(q.o[q.a]):"<i>kosong</i>")+'</p><p>Jawaban benar: <b>'+E(d[1])+'</b></p><p class="mu">💡 '+E(d[3])+'</p></div>'}).join("")+'<a class="rs">Reset perangkat (guru)</a>'}
+function leave(){if(S&&!S.done&&!$("#quiz").classList.contains("h"))away=true}
+function back(){if(away&&S&&!S.done){away=false;reset()}}
+document.addEventListener("visibilitychange",()=>document.hidden?leave():back());
+addEventListener("blur",leave);addEventListener("focus",back);
+addEventListener("copy",e=>e.preventDefault());addEventListener("contextmenu",e=>e.preventDefault());
+$("#go").onclick=start;
+$("#q").onclick=e=>{const o=e.target.closest(".op");if(o){S.qs[S.cur].a=+o.dataset.j;save();render()}};
+$("#grid").onclick=e=>{const g=e.target.closest(".g");if(g){S.cur=+g.dataset.g;render()}};
+$("#prev").onclick=()=>{S.cur--;render()};$("#next").onclick=()=>{S.cur++;render()};
+$("#send").onclick=()=>{const k=S.qs.filter(q=>q.a<0).length;modal("<h3>Kirim nilai?</h3><p>"+(k?"Masih ada <b>"+k+"</b> soal kosong (dihitung salah). ":"Semua soal sudah dijawab. ")+"Setelah dikirim, jawaban tidak bisa diubah.</p>",[["Batal"],["Ya, kirim nilai","pri",()=>finish(false)]])};
+document.addEventListener("click",e=>{if(e.target.classList.contains("rs")&&prompt("PIN guru:")===PIN){try{localStorage.removeItem(K)}catch(x){}location.reload()}});
+try{S=JSON.parse(localStorage.getItem(K))}catch(e){S=null}
+if(S){if(S.done)result();else if(Date.now()>=S.t0+DUR)finish(true);else{run();reset()}}
+</script></body></html>
